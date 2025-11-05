@@ -1,0 +1,13 @@
+/* small input styles */
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  outline: none;
+}
+.input:focus {
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.06);
+  border-color: #6366f1;
+}

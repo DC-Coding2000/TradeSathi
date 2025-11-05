@@ -1,0 +1,87 @@
+<!doctype html>
+<html><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css">
+  <title>Result</title>
+</head><body class="bg-gray-50">
+  <div class="max-w-4xl mx-auto p-6">
+    <div class="bg-white p-6 rounded-xl shadow">
+      <div class="flex justify-between items-start">
+        <div>
+          <h2 class="text-2xl font-semibold">Estimated Shipment Summary</h2>
+          <p class="text-sm text-gray-600 mt-1">{{ source }} → {{ destination }} | {{ distance_km }} km</p>
+        </div>
+        <div>
+          <a href="/" class="text-indigo-600 hover:underline">New estimate</a>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-3 gap-4">
+        <div class="p-4 rounded-lg bg-gray-50">
+          <div class="text-xs text-gray-500">Predicted Cost (INR)</div>
+          <div class="text-2xl font-bold">₹ {{ pred_cost }}</div>
+        </div>
+        <div class="p-4 rounded-lg bg-gray-50">
+          <div class="text-xs text-gray-500">Predicted Delivery (days)</div>
+          <div class="text-2xl font-bold">{{ pred_time }}</div>
+        </div>
+        <div class="p-4 rounded-lg bg-gray-50">
+          <div class="text-xs text-gray-500">Estimated CO₂ (kg)</div>
+          <div class="text-2xl font-bold">{{ pred_carbon }}</div>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="font-semibold">AI SCM Suggestions</h3>
+        <ul class="mt-2 list-disc list-inside text-gray-700">
+          <li>Suggested transport mode: <strong class="capitalize">{{ mode_suggest }}</strong></li>
+          <li>Route hint: {{ route_hint }}</li>
+          <li>Top logistics partners for this shipment:
+            <ul class="list-inside list-disc mt-1">
+              {% for p in partners %}
+              <li>{{ p }}</li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="font-semibold">Cost Breakdown</h3>
+        <div class="mt-2 grid grid-cols-2 gap-4">
+          <div class="p-3 bg-gray-50 rounded">
+            <div class="text-sm">Freight</div>
+            <div class="font-medium">₹ {{ breakdown.freight }}</div>
+          </div>
+          <div class="p-3 bg-gray-50 rounded">
+            <div class="text-sm">Insurance</div>
+            <div class="font-medium">₹ {{ breakdown.insurance }}</div>
+          </div>
+          <div class="p-3 bg-gray-50 rounded">
+            <div class="text-sm">Customs & Handling</div>
+            <div class="font-medium">₹ {{ breakdown.customs_docs_and_handling }}</div>
+          </div>
+          <div class="p-3 bg-gray-50 rounded">
+            <div class="text-sm">Other fees</div>
+            <div class="font-medium">₹ {{ breakdown.other_fees }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="font-semibold">Documents Checklist</h3>
+        <ul class="list-inside list-disc mt-2 text-gray-700">
+          {% for d in docs %}
+          <li>{{ d }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="mt-6 text-sm text-gray-500">
+        <strong>Model note:</strong> This AI model is trained on a small dataset for demo. Replace <code>model/training_data.csv</code> with real historical data and upload via the CSV page to retrain and improve accuracy.
+      </div>
+
+    </div>
+  </div>
+</body></html>

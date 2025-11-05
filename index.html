@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TradeSathi — Home</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-4xl mx-auto p-6">
+    <header class="mb-6">
+      <h1 class="text-3xl font-semibold">TradeSathi — AI SCM & Demo</h1>
+      <p class="mt-1 text-sm text-gray-600">Estimate export cost, ETA, carbon and access admin/demo features.</p>
+    </header>
+
+    <main class="bg-white rounded-xl shadow p-6">
+      <form action="/predict" method="post" class="grid grid-cols-1 gap-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium">Source (city)</label>
+            <input name="source" required class="mt-1 input" placeholder="e.g., Pune">
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Destination (city/country)</label>
+            <input name="destination" required class="mt-1 input" placeholder="e.g., Dubai">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-medium">Distance (km)</label>
+            <input name="distance_km" type="number" step="0.1" class="mt-1 input" value="500" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Weight (kg)</label>
+            <input name="weight_kg" type="number" step="0.1" class="mt-1 input" value="50" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Volume (m³)</label>
+            <input name="volume_m3" type="number" step="0.01" class="mt-1 input" value="0.5" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-medium">Preferred Mode</label>
+            <select name="mode" class="mt-1 input">
+              <option value="road">Road</option>
+              <option value="air">Air</option>
+              <option value="sea">Sea</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Urgency</label>
+            <select name="urgency" class="mt-1 input">
+              <option value="0">Normal</option>
+              <option value="1">Urgent (faster)</option>
+            </select>
+          </div>
+          <div class="flex items-end">
+            <button type="submit" class="w-full py-2 rounded-lg bg-indigo-600 text-white font-semibold">Get AI SCM estimate</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="mt-6 grid grid-cols-2 gap-4">
+        <a href="/register" class="block p-3 rounded bg-gray-100 text-center">Register (Seller / Buyer)</a>
+        <a href="/upload" class="block p-3 rounded bg-gray-100 text-center">Upload CSV & Retrain Model</a>
+        <a href="/dashboard" class="block p-3 rounded bg-gray-100 text-center">Dashboard</a>
+        <a href="/invoice" class="block p-3 rounded bg-gray-100 text-center">Generate Invoice (PDF)</a>
+        <a href="/escrow" class="block p-3 rounded bg-gray-100 text-center">Mock Escrow</a>
+        <a href="/login" class="block p-3 rounded bg-gray-100 text-center">Admin Login</a>
+      </div>
+    </main>
+
+    <footer class="mt-6 text-sm text-gray-500">
+      <p>Project: TradeSathi — Demo for Regional Science Exhibition 2025 (CBSE)</p>
+    </footer>
+  </div>
+</body>
+</html>
